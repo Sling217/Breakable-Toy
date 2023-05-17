@@ -33,6 +33,33 @@ class User extends uniqueFunc(Model) {
       },
     };
   }
+  
+  static get relationMappings() {
+    const { Game, Review } = require("./index.js")
+    return {
+      reviews: {
+        relation: Model.HasManyRelation,
+        modelClass: Review,
+        join: {
+          from: "users.id",
+          to: "reviews.userId"
+        }
+      },
+
+      games: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Game,
+        join: {
+          from: "users.id",
+          through: {
+            from: "userGames.userId",
+            to: "userGames.gameId"
+          },
+          to: "games.id"
+        }
+      }
+    }
+  }
 
   $formatJson(json) {
     const serializedJson = super.$formatJson(json);

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { connection } from "../boot.js"
+import { connection } from "../../boot.js"
 
 class Seeder {
   static async seed() {
