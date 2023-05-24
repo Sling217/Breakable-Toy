@@ -26,12 +26,40 @@ class User extends uniqueFunc(Model) {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["email"],
+      required: ["email", "userName"],
       properties: {
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
+        userName: { type: "string" },
         cryptedPassword: { type: "string" },
       },
     };
+  }
+  
+  static get relationMappings() {
+    const { Game, Review } = require("./index.js")
+    return {
+      reviews: {
+        relation: Model.HasManyRelation,
+        modelClass: Review,
+        join: {
+          from: "users.id",
+          to: "reviews.userId"
+        }
+      },
+
+      games: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Game,
+        join: {
+          from: "users.id",
+          through: {
+            from: "userGames.userId",
+            to: "userGames.gameId"
+          },
+          to: "games.id"
+        }
+      }
+    }
   }
 
   $formatJson(json) {

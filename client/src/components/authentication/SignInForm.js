@@ -67,36 +67,43 @@ const SignInForm = () => {
   };
 
   if (shouldRedirect) {
-    location.href = "/";
+    location.href = "/games";
   }
 
   return (
-    <div className="grid-container" onSubmit={onSubmit}>
-      <h1>Sign In</h1>
-      <form>
-        <div>
-          <label>
-            Email
-            <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
-            <FormError error={errors.email} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              value={userPayload.password}
-              onChange={onInputChange}
-            />
-            <FormError error={errors.password} />
-          </label>
-        </div>
-        <div>
-          <input type="submit" className="button" value="Sign In" />
-        </div>
-      </form>
+    <div className="sign-in-form-color">
+      <div className="sign-in-form " onSubmit={onSubmit}>
+        <h3 className="sign-in-header text-center">Sign In</h3>
+        <form>
+          <div>
+            <label>
+              Email
+              <input 
+                className="form-field-input form-input" 
+                type="text" name="email" 
+                value={userPayload.email} 
+                onChange={onInputChange} />
+              <FormError error={errors.email} />
+            </label>
+          </div>
+          <div>
+            <label>
+              Password
+              <input
+                className="form-field-input form-input"
+                type="password"
+                name="password"
+                value={userPayload.password}
+                onChange={onInputChange}
+              />
+              <FormError error={errors.password} />
+            </label>
+          </div>
+          <div>
+            <input type="submit" className="form-button" value="Sign In" />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
