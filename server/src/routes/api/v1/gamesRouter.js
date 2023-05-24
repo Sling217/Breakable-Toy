@@ -1,6 +1,6 @@
 import express from "express";
 import { Game } from "../../../models/index.js";
-import GamesSerializer from "../../../db/Serializers/GamesSerializer";
+import GamesSerializer from "../../../db/Serializers/GamesSerializer.js";
 
 const gamesRouter = new express.Router()
 

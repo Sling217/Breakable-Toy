@@ -5,6 +5,7 @@ import config from "../../config";
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
     email: "",
+    userName:"",
     password: "",
     passwordConfirmation: "",
   });
@@ -15,7 +16,7 @@ const RegistrationForm = () => {
 
   const validateInput = (payload) => {
     setErrors({});
-    const { email, password, passwordConfirmation } = payload;
+    const { email, password, passwordConfirmation, userName } = payload;
     const emailRegexp = config.validation.email.regexp;
     let newErrors = {};
 
@@ -26,6 +27,13 @@ const RegistrationForm = () => {
       };
     }
 
+    if (userName.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        userName: "is required",
+      };
+    }
+    
     if (password.trim() == "") {
       newErrors = {
         ...newErrors,
@@ -98,14 +106,33 @@ const RegistrationForm = () => {
         <div>
           <label>
             Email
-            <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
+            <input 
+            className="form-field-input"
+              type="text" 
+              name="email" 
+              value={userPayload.email} 
+              onChange={onInputChange} />
             <FormError error={errors.email} />
+          </label>
+        </div>
+        <div>
+          <label>
+            User Name
+            <input
+              className="form-field-input"
+              type="text"
+              name="userName"
+              value={userPayload.userName}
+              onChange={onInputChange}
+              />
+              <FormError error={errors.userName} />
           </label>
         </div>
         <div>
           <label>
             Password
             <input
+            className="form-field-input"
               type="password"
               name="password"
               value={userPayload.password}
@@ -118,6 +145,7 @@ const RegistrationForm = () => {
           <label>
             Password Confirmation
             <input
+            className="form-field-input"
               type="password"
               name="passwordConfirmation"
               value={userPayload.passwordConfirmation}

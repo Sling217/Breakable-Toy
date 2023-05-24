@@ -12,7 +12,7 @@ exports.up = async (knex) => {
         table.string("name").notNullable()
         table.text("description").notNullable()
         table.string("genres").notNullable()
-        table.integer("prices").notNullable()
+        table.integer("prices")
         table.string("platforms").notNullable()
 
         table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
