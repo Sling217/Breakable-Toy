@@ -44,7 +44,7 @@ const GamesList = (props) => {
                     </div>
                 </div>
                 <div className="center-text">
-                <Link className="add-park-link" to="/games/new">Add a new Game</Link>
+                <Link className="add-game-link" to="/games/new">Add a new Game</Link>
                 </div>
             </div>
         </div>
