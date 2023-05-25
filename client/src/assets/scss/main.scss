@@ -10,10 +10,11 @@
 
 $color-lighter-blue:#e8f7fa;
 $color-electric-blue:#00b7ff;
-$color-blue: #0084ff;
+$color-blue-gray: #07284653;
 $color-purple:#d400ff;
-$color-light-gray:#f5f5f5;
-$color-deep-charcoal-gray:#333333;
+$color-light-gray:#f5f5f58b;
+$color-deep-charcoal-gray:#210303;
+$color-deep-gray: #2411043c;
 $color-green-gray:#c8d3cf;
 $color-lightened-green-gray: lighten($color-green-gray, 35%);
 $color-dark-green-gray: #a6bab3;
@@ -39,7 +40,7 @@ $color-edit: rgb(137, 174, 239);
 }
 
 body{
-  background-color: $color-green-gray;
+  background-color: $color-blue-gray;
 }
 
 .form-field-input {
@@ -74,7 +75,7 @@ body{
 .sign-in-form {
   padding: 1rem 1.5em;
   border-radius: 1rem;
-  background-color: $color-army-green;
+  background-color: $color-deep-gray;
   margin-right: 10%;
   margin-left: 10%;
   margin-top: 5%;
@@ -178,7 +179,7 @@ body{
   color: $dark-font-color
 }
 
-.add-park-link {
+.add-game-link {
   font-size: 24px;
   border-radius: 30px;
   border: 1px solid $color-deep-charcoal-gray;
@@ -196,5 +197,65 @@ body{
     background-color: $color-purple;
     border-color: $color-brighter-green;
     color: $dark-font-color
+  }
+}
+
+.new-game-form {
+  @include grid-row();
+  padding: 1rem 1.5em;
+  border-radius: .5rem;
+  background-color: $color-deep-gray ;
+  border-color:$color-deep-gray;
+  border-radius: 30px;
+  width: 90%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+
+  .new-game-header {
+    color: $dark-font-color;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-family: $master-font;
+    text-align: center
+  }
+
+  label {
+    color: $dark-font-color;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: $master-font
+  }
+
+  input:focus {
+    opacity: .9;
+  }
+}
+
+.dark-text {
+  color: $color-darker-green;
+  font-family: $master-font;
+}
+
+.bold-text {
+  font-weight: bolder;
+}
+
+.form-button-dark {
+  border-radius: 30px;
+  border: 2px solid $dark-font-color;
+  color: $dark-font-color;
+  font-weight: bolder;
+  background-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+  padding: 1rem;
+  transition: all ease .4s;
+  margin-bottom: 1em;
+
+  &:hover {
+    background-color: $color-brighter-green;
+    border-color: $color-brighter-green;
   }
 }
