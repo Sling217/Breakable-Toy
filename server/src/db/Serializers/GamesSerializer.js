@@ -14,7 +14,7 @@ class GamesSerializer {
     }
 
     static async detailsForShow (game) {
-        const allowedAttributes = ["id", "name", "description", "platforms", "updatedAt"]
+        const allowedAttributes = ["id", "name", "description", "platforms", "updatedAt", "imageUrl", "stores"]
 
         let newGame = {}
         
@@ -24,6 +24,17 @@ class GamesSerializer {
 
         const gameReviews = await game.$relatedQuery("reviews")
         newGame.reviews = await ReviewSerializer.showReviewDetails(gameReviews)
+
+        return newGame
+    }
+
+    static async detailsForEdit(game) {
+        const allowedAttributes = ["id", "name", "description", "platforms", "imageIUrl", "stores"]
+
+        let newGame = {}
+        for(const attribute of allowedAttributes) {
+            newGame[attribute] = game[attribute]
+        }
 
         return newGame
     }
