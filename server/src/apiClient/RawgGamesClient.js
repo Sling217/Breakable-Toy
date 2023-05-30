@@ -8,7 +8,7 @@ class RawgGamesClient {
             const url = `https://api.rawg.io/api/games/${gameId}?key=${config.rawgKey}`
             const apiResponse = await got(url)
             const responseBody = await JSON.parse(apiResponse.body)
-            const returnedDescription = responseBody.description
+            const returnedDescription = responseBody.description_raw
             return returnedDescription
         } catch (error) {
             return { errors: error.message }
@@ -61,6 +61,23 @@ class RawgGamesClient {
         }
     }
 
+    static async getStores(gameId) {
+        try{
+            const url = `https://api.rawg.io/api/games/${gameId}?key=${config.rawgKey}`
+            const apiResponse = await got(url)
+            const responseBody = JSON.parse(apiResponse.body)
+            let returnStores = {}
+            responseBody.stores.forEach((store) => {
+                return returnStores ={
+                    stores: store.store.name
+                }
+            })
+            return returnStores.stores
+        } catch (error) {
+            return { errors: error.message }
+        }
+    }
+
     static async getStrategyGames() {
         try {
              const url = `https://api.rawg.io/api/games?key=${config.rawgKey}&genres=strategy`
@@ -70,11 +87,14 @@ class RawgGamesClient {
                 const description = await this.getDescription(game.id)
                 const genres = await this.getGenres()
                 const platforms = await this.getPlatforms(game.id)
+                const stores = await this.getStores(game.id)
                 return {
                     name: game.name,
                     description: description,
                     genres: genres,
                     platforms: platforms,
+                    imageUrl: game.background_image,
+                    stores: stores,
                     gameId: game.id
                 }
             }))

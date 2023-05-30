@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import translateServerErrors from "../services/translateServerErrors";
-import ErrorList from "./layout/ErrorList";
-import { Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import translateServerErrors from "../services/translateServerErrors"
+import ErrorList from "./layout/ErrorList"
+import { Redirect } from "react-router-dom"
 
-const NewGameForm = (props) => {
+const EditGameForm = (props) => {
+    const gameId = props.match.params.id
 
     const defaultGame = {
         name: "",
@@ -15,18 +16,38 @@ const NewGameForm = (props) => {
         stores: ""
     }
 
-    const [newGame, setNewGame] = useState(defaultGame)
+    const [editedGame, setEditedGame] = useState(defaultGame)
     const [errors, setErrors] = useState([])
-    const [shouldRedirect, setShouldRedirect] = useState(false)
+    const [shouldRedirectShow, setShouldRedirectShow] = useState(false)
 
-    const postNewGame = async () => {
+    const getExistingGameData = async (gameId) => {
         try {
-            const response = await fetch("/api/v1/games", {
-                method: "POST",
+            const response = await fetch(`/api/v1/games/${gameId}`)
+            if(!response.ok) {
+                const errorMessage = `${response.status} (${response.statusText})`
+                const error = new Error(errorMessage)
+                throw error
+            }
+            const body = await response.json()
+            setEditedGame(body.game)
+        } catch (error) {
+            console.error(`Error in fetch: ${error.message}` )
+        }
+    }
+
+    useEffect(() => {
+        getExistingGameData(gameId)
+    }, [])
+
+
+    const patchEditedGame = async () => {
+        try {
+            const response = await fetch(`/api/v1/games/${gameId}`, {
+                method: "PATCH",
                 headers: new Headers({
                     "Content-Type": "application/json"
                 }),
-                body: JSON.stringify( {game: newGame} )
+                body: JSON.stringify( {game: editedGame} )
             })
             if (!response.ok) {
                 if (response.status === 422) {
@@ -38,17 +59,17 @@ const NewGameForm = (props) => {
                     throw new Error(errorMessage)
                 }
             } else {
-                setShouldRedirect(true)
+                setShouldRedirectShow(true)
             }
-        } catch (error) {
+        } catch(error) {
             console.error("Error in fetch", error.message)
         }
     }
 
     const handleInputChange = (event) => {
-        if(event.currentTarget.type === "text"){
-            setNewGame({
-                ...newGame,
+        if (event.currentTarget.type === "text"){
+            setEditedGame({
+                ...editedGame,
                 [event.currentTarget.name]: event.currentTarget.value
             })
         }
@@ -56,16 +77,16 @@ const NewGameForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        postNewGame()
+        patchEditedGame()
     }
 
-    if(shouldRedirect) {
-        return <Redirect push to="/games" />
+    if (shouldRedirectShow) {
+        return <Redirect push to={`/games/${gameId}`} />
     }
 
     return (
         <div className="new-game-form">
-            <h1 className="new-game-header">Add a New Game</h1>
+            <h1 className="new-game-header">Edit A Game</h1>
             <ErrorList errors={errors}/>
             <form onSubmit={handleSubmit}>
                 <label className="dark-text bold-text">
@@ -75,7 +96,7 @@ const NewGameForm = (props) => {
                         type="text"
                         name="name"
                         onChange={handleInputChange}
-                        value={newGame.name}
+                        value={editedGame.name}
                     />
                 </label>
                 <label className="dark-text bold-text">
@@ -85,7 +106,7 @@ const NewGameForm = (props) => {
                         type="text"
                         name="description"
                         onChange={handleInputChange}
-                        value={newGame.description}
+                        value={editedGame.description}
                     />
                 </label>
                 <label className="dark-text bold-text">
@@ -95,7 +116,7 @@ const NewGameForm = (props) => {
                         type="text"
                         name="genres"
                         onChange={handleInputChange}
-                        value={newGame.genres}
+                        value={editedGame.genres}
                     />
                 </label>
                 <label className="dark-text bold-text">
@@ -105,7 +126,7 @@ const NewGameForm = (props) => {
                         type="text"
                         name="prices"
                         onChange={handleInputChange}
-                        value={newGame.prices}
+                        value={editedGame.prices}
                     />
                 </label>
                 <label className="dark-text bold-text">
@@ -115,7 +136,7 @@ const NewGameForm = (props) => {
                         type="text"
                         name="platforms"
                         onChange={handleInputChange}
-                        value={newGame.platforms}
+                        value={editedGame.platforms}
                     />
                 </label>
                 <label className="dark-text bold-text">
@@ -125,7 +146,7 @@ const NewGameForm = (props) => {
                         type="text"
                         name="imageUrl"
                         onChange={handleInputChange}
-                        value={newGame.imageUrl}
+                        value={editedGame.imageUrl}
                     />
                 </label>
                 <label className="dark-text bold-text">
@@ -135,7 +156,7 @@ const NewGameForm = (props) => {
                         type="text"
                         name="stores"
                         onChange={handleInputChange}
-                        value={newGame.stores}
+                        value={editedGame.stores}
                     />
                 </label>
                 <input className="form-button-dark" type="submit" value="submit" />
@@ -144,4 +165,4 @@ const NewGameForm = (props) => {
     )
 }
 
-export default NewGameForm
+export default EditGameForm

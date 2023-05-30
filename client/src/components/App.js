@@ -9,6 +9,8 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import GamesList from "./GamesList";
 import NewGameForm from "./NewGameForm";
+import GameShowPage from "../components/GameShowPage.js";
+import EditGameForm from "./EditGameForm.js";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -32,6 +34,8 @@ const App = (props) => {
         <Switch>
           <Route exact path="/games" component={GamesList} />
           <Route exact path="/games/new" component={NewGameForm} />
+          <Route exact path="/games/:id/edit" component={EditGameForm} />
+          <Route exact path="/games/:id" render={(props) => <GameShowPage {...props} user={currentUser} />} />
           <Route exact path="/users/new" component={RegistrationForm} />
           <Route exact path="/user-sessions/new" component={SignInForm} />
         </Switch>

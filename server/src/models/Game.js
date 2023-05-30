@@ -14,7 +14,9 @@ class Game extends Model {
                 description: { type: "string", minLength: 15 },
                 genres: { type: "string" },
                 prices: { type: ["integer", "string"] },
-                platforms: { type: "string" }
+                platforms: { type: "string" },
+                imageUrl: { type: "string" },
+                stores: { type: "string" }
             }
         }
     }

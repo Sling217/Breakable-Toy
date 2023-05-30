@@ -19,6 +19,13 @@ class UsersSeeder {
             email: "issa@example.com",
             userName: "issa",
             cryptedPassword: "$2b$10$wUwN1Dv0B8eEnwuc5oor4eO1gGAdx2NTccQZj/fZae.ruLSD7dJGq"
+            },
+
+            {
+                email: "Scrith@example.com",
+                userName: "Scrith",
+                cryptedPassword: "$2b$10$SmLFclvCQE2fhE.dZYnK4eTGMh/AhYgo156ZbMl0AFPNzsg02fF5W",
+                isAdmin: true
             }
     
         ]
