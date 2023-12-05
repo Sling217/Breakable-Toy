@@ -72,7 +72,8 @@ body{
   }
 }
 
-.sign-in-form {
+.sign-in-form,
+.registration-form {
   padding: 1rem 1.5em;
   border-radius: 1rem;
   background-color: $color-deep-gray;
@@ -427,4 +428,18 @@ body{
   font-family: $master-font;
   font-size: 14px;
   color: $dark-font-color;
+}
+
+.review-tile-header {
+  font-family: $master-font;
+  font-size: 20px;
+  font-weight: bold;
+  color: $dark-font-color;
+}
+
+.image-drop-section {
+  border-radius: 1rem;
+  font-family: $master-font;
+  color: $dark-font-color;
+  font-style: italic;
 }

@@ -13,7 +13,8 @@ class Review extends Model {
                 reviewText: { type: "string", minLength: 15 },
                 rating: { type: ["integer", "string"] },
                 userId: { type: ["integer", "string"] },
-                gameId: { type: ["integer", "string"] }
+                gameId: { type: ["integer", "string"] },
+                imageUrl: { type: "string" }
             }
         }
     }

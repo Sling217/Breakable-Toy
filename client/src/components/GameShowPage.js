@@ -9,7 +9,7 @@ const GameShowPage = (props) => {
         name:"",
         description:"",
         platforms: "",
-        updatedAt: "",
+        updatedAt: new Date(),
         imageUrl:"",
         stores: "",
         reviews: [],
@@ -71,6 +71,8 @@ const GameShowPage = (props) => {
             )
         }
     )
+    
+    const formattedDate = format(new Date(game.updatedAt), 'MMMM dd, yyyy HH:mm ')
 
     useEffect(() => {
         getGame()
@@ -125,6 +127,7 @@ const GameShowPage = (props) => {
                     <p className="address-bold"> Platforms: {game.platforms}</p>
                     <p className="address-bold">Stores: {game.stores}</p>
                     <div className="row grid-x">
+                        <div className="date-text"> Last Updated: {formattedDate}</div>
                         <button onClick={handleOnClickEditGame} className={`override-button-color right-side ${classHideNotAdmin}`}>{isAdmin && editMessage}</button>
                         <button onClick={handleOnClickDeleteGame} className={`delete-button-dark ${classHideNotAdmin}`}>{isAdmin && deleteMessage}</button>
                     </div>
@@ -134,7 +137,7 @@ const GameShowPage = (props) => {
                 </div>
                 <div className="show-page-reviews">
                     <div className="row grid-x">
-                        <div>
+                        <div className="small-6 columns end">
                             <h3 className="review-list-header">Review List</h3>
                             {reviewsListOrganic}
                         </div>

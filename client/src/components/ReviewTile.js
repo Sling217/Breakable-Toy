@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as thinStar } from "@fortawesome/free-regular-svg-icons";
 
-const ReviewTile = ({id, reviewText, rating, imageUrl, userId, currentUser, isAdmin, handleOnClickDeleteReview }) => {
+const ReviewTile = ({id, reviewText, rating, imageUrl, userName, userId, currentUser, isAdmin, handleOnClickDeleteReview }) => {
     let currentUserId = null
     if (currentUser) {
         currentUserId = currentUser.id
@@ -39,8 +39,12 @@ const ReviewTile = ({id, reviewText, rating, imageUrl, userId, currentUser, isAd
         return iconRatingArray
     }
 
+    let userTitle =`${userName}'s Review`
+
+
     return (
         <div className="review-callout callout">
+            <h4 className="review-tile-header">{userTitle}</h4>
             <p className="review-tile-text">{reviewText}</p>
             <p className="review-tile-text">Rating: {getRating(rating)}</p>
             <p>{imageSection}</p>
