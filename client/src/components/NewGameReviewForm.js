@@ -20,7 +20,7 @@ const NewGameReviewForm = (props) => {
 
     const uncheckedIcon = <FontAwesomeIcon className="right-margin-smaller" icon={thinStar} />
 
-    const postNewParkReview = async () => {
+    const postNewGameReview = async () => {
         const newImageBody = new FormData()
         newImageBody.append("rating", newReview.rating)
         newImageBody.append("reviewText", newReview.reviewText)
@@ -65,7 +65,7 @@ const NewGameReviewForm = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        postNewParkReview()
+        postNewGameReview()
         clearForm()
     }
 

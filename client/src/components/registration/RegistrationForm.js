@@ -96,68 +96,70 @@ const RegistrationForm = () => {
   };
 
   if (shouldRedirect) {
-    location.href = "/";
+    location.href = "/user-sessions/new";
   }
 
   return (
-    <div className="grid-container">
-      <h1>Register</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>
-            Email
-            <input 
-            className="form-field-input"
-              type="text" 
-              name="email" 
-              value={userPayload.email} 
-              onChange={onInputChange} />
-            <FormError error={errors.email} />
-          </label>
-        </div>
-        <div>
-          <label>
-            User Name
-            <input
+    <div className="sign-in-form">
+      <div className="grid-container">
+        <h3 className="sign-in-header">Register</h3>
+        <form onSubmit={onSubmit}>
+          <div>
+            <label>
+              Email
+              <input 
               className="form-field-input"
-              type="text"
-              name="userName"
-              value={userPayload.userName}
-              onChange={onInputChange}
+                type="text" 
+                name="email" 
+                value={userPayload.email} 
+                onChange={onInputChange} />
+              <FormError error={errors.email} />
+            </label>
+          </div>
+          <div>
+            <label>
+              User Name
+              <input
+                className="form-field-input"
+                type="text"
+                name="userName"
+                value={userPayload.userName}
+                onChange={onInputChange}
+                />
+                <FormError error={errors.userName} />
+            </label>
+          </div>
+          <div>
+            <label>
+              Password
+              <input
+              className="form-field-input"
+                type="password"
+                name="password"
+                value={userPayload.password}
+                onChange={onInputChange}
               />
-              <FormError error={errors.userName} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input
-            className="form-field-input"
-              type="password"
-              name="password"
-              value={userPayload.password}
-              onChange={onInputChange}
-            />
-            <FormError error={errors.password} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password Confirmation
-            <input
-            className="form-field-input"
-              type="password"
-              name="passwordConfirmation"
-              value={userPayload.passwordConfirmation}
-              onChange={onInputChange}
-            />
-            <FormError error={errors.passwordConfirmation} />
-          </label>
-        </div>
-        <div>
-          <input type="submit" className="button" value="Register" />
-        </div>
-      </form>
+              <FormError error={errors.password} />
+            </label>
+          </div>
+          <div>
+            <label>
+              Password Confirmation
+              <input
+              className="form-field-input"
+                type="password"
+                name="passwordConfirmation"
+                value={userPayload.passwordConfirmation}
+                onChange={onInputChange}
+              />
+              <FormError error={errors.passwordConfirmation} />
+            </label>
+          </div>
+          <div>
+            <input type="submit" className="form-button" value="Register" />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

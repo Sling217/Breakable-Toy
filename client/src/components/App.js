@@ -11,6 +11,7 @@ import GamesList from "./GamesList";
 import NewGameForm from "./NewGameForm";
 import GameShowPage from "../components/GameShowPage.js";
 import EditGameForm from "./EditGameForm.js";
+import Home from "./Home.js";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -32,6 +33,8 @@ const App = (props) => {
       <Router>
         <TopBar user={currentUser} />
         <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={Home} />
           <Route exact path="/games" component={GamesList} />
           <Route exact path="/games/new" component={NewGameForm} />
           <Route exact path="/games/:id/edit" component={EditGameForm} />
